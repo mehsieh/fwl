@@ -1,0 +1,51 @@
+.button{
+	width: 44px;
+	height: 50px;
+	border: 2px solid;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 10px;
+	font-size: 40px;
+	float: left;
+	text-align: center;
+	padding-top: auto;
+}
+
+.letters{
+  width:300px;
+}
+
+.players{
+  width: 50%;
+  height: 20px;
+	float: left;
+	text-align: center;
+	padding-top: auto;
+}
+
+#player1 {
+  color: red;
+}
+
+#player2 {
+  color: blue;
+}
+
+#board-body{
+	width: 900px;
+}
+.button:active{
+	background: #000;
+	color: #FFF;
+}
+.button:hover{
+	background: grey;
+}
+#display{
+	width: 100%;
+	height: 60px;
+	border: 2px solid;
+	float: left;
+	text-align: center;
+	padding-top: auto;
+}
