@@ -34,16 +34,29 @@ var b20 = new letter('b20', false, 0);
 
 var display_list = [];
 
-function displayChange(letters)
- {
+function showDisplay(letters)
+  {
    var letter = window[letters];
    if (letter.in_display == false)
     {
       letter.in_display = true;
       var value = $(".letters").find("#"+letter.b_id).html();
       letter.value = value;
-      display = "<div class='button' id='"+letter.b_id+"' >"+ letter.value + "</div>";
+      var removeDisplay = 'removeDisplay("' + letters + '")';
+      display = "<div class='button' id='"+letter.b_id+"' onClick='" + removeDisplay + "' >"+ letter.value + "</div>";
       $("#display").append(display);
+      display_list.push(letter);
       $(".letters").find("#"+letter.b_id).css("background-color", "black");
+      
     }
- }
+  }
+
+function removeDisplay(letters)
+  {
+    var letter = window[letters];
+    $("#display").find("#"+letter.b_id).remove();
+    $(".letters").find("#"+letter.b_id).css("background-color", "white");
+    var index_to_remove = display_list.indexOf(letter);
+    letter.in_display = false;
+    display_list.splice(index_to_remove, 1);
+  }
