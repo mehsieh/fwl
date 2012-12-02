@@ -1,6 +1,6 @@
-var score1;
-var score2;
-var player_is = 1;
+var score1 = 0;
+var score2 = 0;
+var player_turn = 1;
 
 function letter(b_id, in_display, belongs_to)
   {
@@ -31,6 +31,11 @@ var b17 = new letter('b17', false, 0);
 var b18 = new letter('b18', false, 0);
 var b19 = new letter('b19', false, 0);
 var b20 = new letter('b20', false, 0);
+var b21 = new letter('b21', false, 0);
+var b22 = new letter('b22', false, 0);
+var b23 = new letter('b23', false, 0);
+var b24 = new letter('b24', false, 0);
+var b25 = new letter('b25', false, 0);
 
 var display_list = [];
 
@@ -47,7 +52,16 @@ function showDisplay(letters)
       $("#display").append(display);
       display_list.push(letter);
       $(".letters").find("#"+letter.b_id).css("background-color", "black");
-      
+      if (player_turn == 1) {
+        score1+= 1;
+        var s1_string = "Player 1: " + score1;
+        $("#player1").html(s1_string);
+      }
+      if (player_turn == 2) {
+        score2+=1;
+        var s2_string = "Player 2: " + score2;
+        $("#player2").html(s2_string);
+      }
     }
   }
 
@@ -57,6 +71,16 @@ function removeDisplay(letters)
     $("#display").find("#"+letter.b_id).remove();
     $(".letters").find("#"+letter.b_id).css("background-color", "white");
     var index_to_remove = display_list.indexOf(letter);
-    letter.in_display = false;
     display_list.splice(index_to_remove, 1);
+    letter.in_display = false;
+    if (player_turn == 1) {
+      score1-= 1;
+      var s1_string = "Player 1: " + score1;
+      $("#player1").html(s1_string);
+    }
+    if (player_turn == 2) {
+      score2-=1;
+      var s2_string = "Player 2: " + score2;
+      $("#player2").html(s2_string);
+    }
   }

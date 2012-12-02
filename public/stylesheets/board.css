@@ -15,6 +15,19 @@
   width:300px;
 }
 
+#submit {
+  width:200px;
+  height: 50px;
+	border: 2px solid;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 10px;
+	font-size: 40px;
+	float: left;
+	text-align: center;
+	padding-top: auto;
+}
+
 .players{
   width: 50%;
   height: 20px;
@@ -23,12 +36,20 @@
 	padding-top: auto;
 }
 
+.score-board {
+  height: 75px;
+	text-align: center;
+	padding-top: auto;
+}
+
 #player1 {
   color: red;
+  font-size: 50px;
 }
 
 #player2 {
   color: blue;
+  font-size: 50px;
 }
 
 #board-body{
