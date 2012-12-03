@@ -1,6 +1,8 @@
 var score1 = 0;
 var score2 = 0;
 var player_turn = 1;
+var display_list = [];
+var word = '';
 
 function letter(b_id, in_display, belongs_to)
   {
@@ -9,7 +11,7 @@ function letter(b_id, in_display, belongs_to)
     this.belongs_to=belongs_to;
   }
   
-// instantiate all letter buttons
+// initiate  all letter buttons
 
 var b1 = new letter('b1', false, 0);
 var b2 = new letter('b2', false, 0);
@@ -37,8 +39,6 @@ var b23 = new letter('b23', false, 0);
 var b24 = new letter('b24', false, 0);
 var b25 = new letter('b25', false, 0);
 
-var display_list = [];
-
 function showDisplay(letters)
   {
    var letter = window[letters];
@@ -53,11 +53,27 @@ function showDisplay(letters)
       display_list.push(letter);
       $(".letters").find("#"+letter.b_id).css("background-color", "black");
       if (player_turn == 1) {
+        if (letter.belongs_to == 2){
+          score2-=1;
+          var s2_string = "Player 2: " + score2;
+          $("#player2").html(s2_string);
+        }
+        if (letter.belongs_to == 1){
+          score1 -= 1;
+        }
         score1+= 1;
         var s1_string = "Player 1: " + score1;
         $("#player1").html(s1_string);
       }
       if (player_turn == 2) {
+        if (letter.belongs_to == 1){
+          score1-=1;
+          var s1_string = "Player 1: " + score1;
+          $("#player1").html(s1_string);
+        }
+        if (letter.belongs_to == 2){
+          score2 -= 1;
+        }
         score2+=1;
         var s2_string = "Player 2: " + score2;
         $("#player2").html(s2_string);
@@ -69,16 +85,40 @@ function removeDisplay(letters)
   {
     var letter = window[letters];
     $("#display").find("#"+letter.b_id).remove();
-    $(".letters").find("#"+letter.b_id).css("background-color", "white");
+    if (letter.belongs_to == 0) {
+      $('.letters').find('#'+letter.b_id).css("background-color", "white");
+    }
+    else if (letter.belongs_to == 1) {
+      $('.letters').find('#'+letter.b_id).css("background-color", "red");
+    }
+    else {
+      $('.letters').find('#'+letter.b_id).css("background-color", "blue");
+    }
     var index_to_remove = display_list.indexOf(letter);
     display_list.splice(index_to_remove, 1);
     letter.in_display = false;
     if (player_turn == 1) {
+      if (letter.belongs_to == 1){
+        score1 += 1;
+      }
+      if (letter.belongs_to == 2){
+        score2 += 1;
+        var s2_string = "Player 2: " + score2;
+        $("#player2").html(s2_string);
+      }
       score1-= 1;
       var s1_string = "Player 1: " + score1;
       $("#player1").html(s1_string);
     }
     if (player_turn == 2) {
+      if (letter.belongs_to == 2){
+        score2 += 1;
+      }
+      if (letter.belongs_to == 1){
+        score1 += 1;
+        var s1_string = "Player 1: " + score1;
+        $("#player2").html(s2_string);
+      }
       score2-=1;
       var s2_string = "Player 2: " + score2;
       $("#player2").html(s2_string);

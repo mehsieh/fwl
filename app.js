@@ -5,9 +5,9 @@
 
 var express = require('express')
   , http = require('http')
-  , path = require('path');
-  // , sio = require('socket.io')
-  // , serverSockets = require('./routes/serverSocket.js');
+  , path = require('path')
+  , sio = require('socket.io')
+  , serverSockets = require('./routes/serverSocket.js');
 
 var app = express();
 
@@ -28,9 +28,9 @@ app.configure('development', function(){
 });
 
 var server = http.createServer(app);
-// var io = sio.listen(server);
+var io = sio.listen(server);
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 	});
 
-// serverSockets.init(io);
+serverSockets.init(io);
