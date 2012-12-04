@@ -1,5 +1,6 @@
 // template for serverSocket.js
 
+// initialize all variables
 var currentPlayers = 0;
 var score1;
 var score2;
@@ -7,9 +8,11 @@ var display_list;
 var player_turn;
 var maxPlayers = 2;
 
+// randomizes the board so that very time the server starts a new board is generated.
 function generateBoard() {
   var boardLetters = [];
   for (var i=1;i<=25; i++){
+    // use the ASCII value from 65-90 for letters
     var randomLetter = String.fromCharCode(Math.floor(Math.random()*25)+65);
     boardLetters.push(randomLetter);
   }
@@ -17,7 +20,6 @@ function generateBoard() {
 };
 
 exports.init = function(io) {
-  var boardLetters = generateBoard();
   
   io.sockets.on('connection', function (socket) {
 		++currentPlayers;
@@ -30,6 +32,7 @@ exports.init = function(io) {
 			socket.broadcast.emit('tooManyPlayers');
 		}
 		else {
+		  var boardLetters = generateBoard();
 		  socket.emit('play', {boardLetters: boardLetters});
 		  socket.broadcast.emit('play', {boardLetters: boardLetters});
 		}
